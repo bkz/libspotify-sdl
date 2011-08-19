@@ -1,0 +1,18 @@
+This is a straight port of the jukebox.c example in the libspotify (linux) SDK to SDL.
+
+Make sure you have libspotify and libSDL includes and libs on your search path
+and do one of the following:
+
+Linux (GCC):
+
+     g++ jukebox.cpp -lSDL -lSDLmain -lspotify
+
+Windows (MSVC)
+
+     Create an empty Win32 C++ console solution and add jukebox.cpp to it.
+     Build the solution, it should automatically link with libspotify.lib,
+     SDL.lib, SDLmain.lib (see the pragmas in jukebox.cpp).
+
+
+Babar K. Zafar
+2011-08-19
