@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <math.h>
+#include <time.h>
 #include <queue>
 
 #include "getopt.h"
@@ -70,6 +72,10 @@ typedef unsigned short uint16_t;
 typedef unsigned int   uint32_t;
 
 enum {
+    FADE_IN_AUDIO_DURATION_SECS = 10,
+};
+
+enum {
     SDL_AUDIO_SAMPLE_SIZE = sizeof(uint16_t),
     SDL_AUDIO_SAMPLE_RATE = 44100,
     SDL_AUDIO_CHANNELS = 2,
@@ -129,16 +135,22 @@ static int audio_delivery(sp_session *sess, const sp_audioformat *format,
     return SDL_AUDIO_BUFFER_FRAMES;
 }
 
-
 static void audio_mix(void* unused, Uint8* stream, int len)
 {
     assert(len == SDL_AUDIO_REQUEST_SIZE);
+
+    double elapsed = double(clock()) / double(CLOCKS_PER_SEC);
+
+    int volume = SDL_MIX_MAXVOLUME;
+
+    if (elapsed < FADE_IN_AUDIO_DURATION_SECS)
+        volume = int(double(volume) * double(elapsed) / double(FADE_IN_AUDIO_DURATION_SECS));
 
     if (!g_playback_done && g_audio_queue.size() > 0)
     {
         SDL_mutexP(g_audio_mutex);
         uint8_t* chunk = g_audio_queue.front();
-        SDL_MixAudio(stream, chunk, SDL_AUDIO_REQUEST_SIZE, SDL_MIX_MAXVOLUME);
+        SDL_MixAudio(stream, chunk, SDL_AUDIO_REQUEST_SIZE, volume);
         delete[] chunk;
         g_audio_queue.pop();
         SDL_mutexV(g_audio_mutex);
