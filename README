@@ -13,6 +13,11 @@ Windows (MSVC)
      Build the solution, it should automatically link with libspotify.lib,
      SDL.lib, SDLmain.lib (see the pragmas in jukebox.cpp).
 
+Why do I need this?
+
+     Get rid of your alarm! Create a playlist and setup crontab :)
+
+     30 07 * * * ~/bin/jukebox -u username -p password -l Alarm -d
 
 Babar K. Zafar
 2011-08-19
