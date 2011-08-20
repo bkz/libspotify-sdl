@@ -18,9 +18,9 @@
     #pragma comment(lib, "libspotify.lib")
 #endif
 
-#include "libsdl/SDL.h"
-#include "libsdl/SDL_audio.h"
-#include "libsdl/SDL_thread.h"
+#include "SDL/SDL.h"
+#include "SDL/SDL_audio.h"
+#include "SDL/SDL_thread.h"
 
 #ifdef _MSC_VER
     #define strcasecmp _stricmp
