@@ -22,6 +22,10 @@
 #include "SDL/SDL_audio.h"
 #include "SDL/SDL_thread.h"
 
+#ifdef __APPLE__
+    #undef main // No SDLmain.lib on OSX.
+#endif
+
 #ifdef _MSC_VER
     #define strcasecmp _stricmp
     #pragma comment(lib, "SDL.lib")

@@ -3,21 +3,22 @@ This is a straight port of the jukebox.c example in the libspotify (linux) SDK t
 Make sure you have libspotify and libSDL includes and libs on your search path
 and do one of the following:
 
+OSX (GCC):
+
+    g++ -o spotify-jukebox jukebox.cpp -framework SDL -framework libspotify
+
 Linux (GCC):
 
-     g++ jukebox.cpp -lSDL -lSDLmain -lspotify
+    g++ -o spotify-jukebox jukebox.cpp -lSDL -lSDLmain -lspotify
 
 Windows (MSVC)
 
-     Create an empty Win32 C++ console solution and add jukebox.cpp to it.
-     Build the solution, it should automatically link with libspotify.lib,
-     SDL.lib, SDLmain.lib (see the pragmas in jukebox.cpp).
+    Create an empty Win32 C++ console solution and add jukebox.cpp to it.
+    Build the solution, it should automatically link with libspotify.lib,
+    SDL.lib, SDLmain.lib (see the pragmas in jukebox.cpp).
 
 Why do I need this?
 
-     Get rid of your alarm! Create a playlist and setup crontab :)
+    Get rid of your alarm! Create a playlist and setup crontab :)
 
-     30 07 * * * ~/bin/jukebox -u username -p password -l Alarm -d
-
-Babar K. Zafar
-2011-08-19
+    30 07 * * * ~/bin/jukebox -u username -p password -l Alarm -d
